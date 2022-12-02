@@ -1,10 +1,31 @@
-- 👋 Hi, I’m @certikash16
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
+#import required modules/packages/library
+import pexpect
+#define variables
+ip_address = '192.168.56.101'
+username = 'prne'
+password = 'cisco123!'
+password_enable = 'class123!'
 
-<!---
-certikash16/certikash16 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+# Create the ssh session
+session = pexpect.spawn ('ssh'+ username+'@'+ip_address,encoding ='utf-8',timeout=20)
+result = session.expect (['password:', pexpect.TIMEOUT, pexpect.EOF])
+# check for error, if exists then display error and exit 
+if result != 0:
+    print('---FAILURE! creating session for:',ip_address)
+    exit()
+   
+    # session expecting password, enter details
+    session.sendline (password)
+    result=session.expect(['>', pexpect.TIMEOUT, pexpect.EOF])
+
+    #check for error, if exists then display error and exit
+    if result != 0:
+        print('---FAILURE! entering password: ',password)
+        exit()
+
+#enter enable mode
+session.sendline('enable')
+
+
+
+
