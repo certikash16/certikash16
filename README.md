@@ -6,8 +6,8 @@ username = 'prne'
 password = 'cisco123!'
 password_enable = 'class123!'
 
-# Create the ssh session
-session = pexpect.spawn ('ssh '+ username + '@' + ip_address,
+# Create the SSH session
+session = pexpect.spawn ('ssh ' + username + '@' + ip_address,
                          encoding ='utf-8',timeout=20)
 result = session.expect(['password:', pexpect.TIMEOUT, pexpect.EOF])
 # check for error, if exists then display error and exit 
@@ -36,8 +36,6 @@ print('')
 print('-------------------------------------------------------')
 # terminate SSH session
 session.close()
-
-
 
 
 
